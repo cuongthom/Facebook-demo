@@ -1,0 +1,26 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.background {
+    background-color: #f0f2f5;
+}
+.facebook-img {
+    width: 300px;
+}
+.boder-box {
+    box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
+    background-color: white;
+    width: 450px;
+    justify-content: center;
+    border-radius: 10px;
+    
+}
+.size-input {
+    outline: 0;
+    border: solid #ccd0d5 1px;
+}
+.w-input {
+    width: 209px;
+}
