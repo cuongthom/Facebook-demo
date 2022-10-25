@@ -1,31 +1,29 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "../style/Login.css";
 import { useState } from "react";
 import { useAuthentication } from "../hooks";
-import { privateRoutes } from "../routes";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { message } from 'antd';
+import { message, Row, Col } from 'antd';
 
 function LoginPage() {
-  const { login, isLoggedIn } = useAuthentication();
+  const { login, isLoggedIn, navigate } = useAuthentication();
   const [loading, setLoading] = useState(false);
   // console.log(useAuthentication);
   console.log("login");
-  const navigate = useNavigate();
   useEffect(() => {
-    if (isLoggedIn) navigate(privateRoutes.home.path);
+    if (isLoggedIn) navigate('/');
   }, [isLoggedIn, navigate]);
   const { register, handleSubmit } = useForm();
 
   const onSubmit = async (data) => {
     const loginPromise = new Promise(async (resolve, reject) => {
       try {
-        
+        console.log("cuong");
         setLoading(true);
         await login(data.email, data.password);
-        navigate(privateRoutes.home.path);
+        navigate('/');
         message.success('Logged in successfully');
         resolve();
       } catch (err) {
@@ -38,10 +36,10 @@ function LoginPage() {
   }
     return (
       <>
-        <section className="bg-color row">
+        <Row className="bg-color row">
           <div className="boder">
-            <div className="bd-1 ">
-              <div className="boder1 col-md-6">
+            <div  className="flex">
+              <Col xl={12} lg={12} md={12} sm={0} xs={0}  className="boder1 col-md-6">
                 <div className="col-md-12">
                   <div className="font-img ">
                     <img
@@ -57,15 +55,14 @@ function LoginPage() {
                     </h2>
                   </div>
                 </div>
-              </div>
-              <div className="boder3 col-md-6">
-                <div className="">
-                  <div className="boder-form">
-                    <form
+              </Col>
+              <Col xl={12} lg={12} md={12} sm={24} xs={24}  className="boder3 col-md-6">
+                  <div className="boder-form bg-white text-center">
+                    <form gutter={24}
                       className="boder-input"
                       onSubmit={handleSubmit(onSubmit)}
                     >
-                      <div className="boder-input1">
+                      <Col xl={24} className="boder-input1">
                         <input
                           name="email"
                           className="boder-radius input2"
@@ -73,8 +70,8 @@ function LoginPage() {
                           placeholder="Email hoặc số điện thoại"
                           {...register("email")}
                         />
-                      </div>
-                      <div className="boder-input1">
+                      </Col>
+                      <Col xl={24} className="boder-input1">
                         <input
                           name="password"
                           className="boder-radius input2"
@@ -82,16 +79,16 @@ function LoginPage() {
                           placeholder="Mật khẩu"
                           {...register("password")}
                         />
-                      </div>
-                      <div className="boder-btn">
+                      </Col>
+                      <Col xl={24} className="boder-btn">
                         <button
-                          className="boder-btn1 boder-radius"
+                          className="boder-btn1 text-white font-medium boder-radius"
                           type="submit"
                           disabled={loading}
                         >
                           {loading ? "loading..." : "Đăng nhập"}
                         </button>
-                      </div>
+                      </Col>
                     </form>
                     <div>
                       <a href="https://www.facebook.com/login/identify/?ctx=recover&ars=facebook_login&from_login_screen=0">
@@ -100,7 +97,7 @@ function LoginPage() {
                     </div>
                     <hr />
                     <div className="text-base py-5">
-                      <button className="boder-radius boder-btn2">
+                      <button className="boder-radius boder-btn2 text-white font-medium">
                         <Link style={{color: "white"}} to="/register">Tạo tài khoản mới</Link>
                       </button>
                     </div>
@@ -112,14 +109,13 @@ function LoginPage() {
                     &nbsp;dành cho người nổi tiếng, thương hiệu hoặc doanh
                     nghiệp.
                   </div>
-                </div>
-              </div>
+              </Col>
             </div>
           </div>
-        </section>
+        </Row>
         <footer></footer>
       </>
     );
-  };
+  }
 
 export default LoginPage;

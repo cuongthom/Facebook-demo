@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 import { clearUser, setUser } from './reducer';
 // tạo những hooks để làm việc với state này
 // lấy state hiện tại
@@ -16,3 +16,4 @@ export const useUser = () => {
   }, [dispatch]);
   return { onSetUser, onClearUser, user };
 };
+

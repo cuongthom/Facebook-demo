@@ -1,24 +1,21 @@
 import "../style/Register.css";
 import React, { useEffect } from "react";
 import {useState} from "react";
-import { privateRoutes } from "../routes";
 import { useAuthentication } from "../hooks";
-import { useNavigate } from "react-router-dom";
 import { useForm } from 'react-hook-form';
-import { Button, message, Space } from 'antd';
-import 'antd/dist/antd.css';
-// import useAuthentication from "../hooks/useAuthentication";
-// import { useNavigate } from "react-router-dom";
-// import { privateRoutes } from "../routes";
+import { message } from 'antd';
+
+
 
 
 const RegisterPage = () => {
-  const { isLoggedIn, registerUser, login } = useAuthentication();
+  console.log('here')
+  const { isLoggedIn, registerUser, login,navigate } = useAuthentication();
   // console.log(login);
-  const navigate = useNavigate();
+  
   const [loading, setLoading] = useState(false);
   useEffect(() => {
-    if (isLoggedIn) navigate(privateRoutes.home.path);
+    if (isLoggedIn) navigate('/');
   }, [isLoggedIn, navigate]);
   
   const {
@@ -39,7 +36,7 @@ const RegisterPage = () => {
         console.log(registerData);
         const newUser = await registerUser(registerData);
         await login(data.email, data.password);
-        navigate(privateRoutes.home.path);
+        navigate('/');
         message.success('Sign Up Success');
         resolve(newUser);
       } catch (err) {

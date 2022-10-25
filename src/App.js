@@ -1,24 +1,27 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
-import  PrivateLayout from "./layouts/PrivateLayout"
 import {QueryClient, QueryClientProvider} from "react-query";
-import {Home, LoginPage, RegisterPage} from "./page";
-
+// import {Home, , Post} from "./page";
+import 'antd/dist/antd.css';
+import {Home, LoginPage, Post, RegisterPage } from "./page";
+import Profile from "./page/Profile"
+import { Toaster } from 'react-hot-toast';
 
 
 function App() {
+
   const queryClient = new QueryClient();
   return (
     <>
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<LoginPage />} />
+          <Route path="/" element={<Home />} />
           <Route path="/register" element={<RegisterPage />} />
-          <Route path="/home" element={<Home />} />
           <Route path="/login" element={<LoginPage />} />
-          {/* <PrivateLayout/> */}
+          <Route path="/post" element={<Post/>}/>
+          <Route path="/profile" element={<Profile/>}/>
         </Routes>
+        <Toaster />
       </BrowserRouter>
     </QueryClientProvider>
     </>
