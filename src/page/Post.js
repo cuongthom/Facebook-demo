@@ -43,10 +43,8 @@ function Post() {
       try {
         setLoading(true);
         //avoid same filename and firestore will replace the old one -> rename file before upload
-
         const urlImg = await uploadImage(file);
         await memeServices.createPost({...values, image: urlImg});
-
         message.success("successful post");
         setFile(null);
         setImage("");
